@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:36:19 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/25 12:06:09 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/25 19:11:05 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,11 @@ int					ft_add_tetri(t_tetros **tetros, t_tetri *tetri);
 t_tetros			*ft_create_tetros(const t_tetri *tetri_1,
 	const t_tetri *tetri_2, const t_tetri *tetri_3, const t_tetri *tetri_4);
 void				ft_add_tetros(t_tetros **tetro, t_tetros *new);
+int					ft_check_tetri_right(t_tetros *tetros);
+int					ft_check_tetri_left(t_tetros *tetros);
+int					ft_check_tetri_down(t_tetros *tetros);
+int					ft_check_tetri_top(t_tetros *tetros);
+int					ft_check_tetros_sides(t_tetros *tetros);
+int					ft_valid_tetros(t_tetros *tetros);
 
 #endif
