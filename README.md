@@ -20,7 +20,7 @@ make re
 then run the programme using
 
 ```
-./tetriminos.out
+./tetriminos.out <filename>
 ```
 
 ## Authors
