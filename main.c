@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 11:52:35 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 12:21:41 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_tetros	*ft_read_tetriminos(int const fd)
 	t_tetros		*tetros;
 	char			*line;
 	int				row;
-	int				col;
 
 	row = 0;
 	tetros = NULL;
@@ -34,20 +33,19 @@ t_tetros	*ft_read_tetriminos(int const fd)
 		}
 		if (!ft_check_read_3(line, row))
 			return (NULL);
-		col = 0;
-		while (line[col] != '\0')
+		while (*line && *line != '\0')
 		{
-			if (!ft_check_read_2(col, line[col]))
+			if (!ft_check_read_2(*line))
 				return (NULL);
-			if (line[col] == '#')
+			if (*line == '#')
 			{
-				if (!ft_add_tetri(&tetros, ft_create_tetri(row, col)))
+				if (!ft_add_tetri(&tetros, ft_create_tetri(row, 4 - ft_strlen(line))))
 				{
 					printf("not a valid tetros should have 4 tetri ***\n");
 					return (NULL);
 				}
 			}
-			col++;
+			line++;
 		}
 		row++;
 	}

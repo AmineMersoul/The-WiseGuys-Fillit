@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 18:59:17 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/25 19:11:21 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 12:19:58 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_valid_tetros(t_tetros *tetros)
 {
 	int count;
 
+	if (!tetros->tetri_1 || !tetros->tetri_2 || !tetros->tetri_3 || !tetros->tetri_4)
+		return (0);
 	count = 0;
 	count += ft_check_tetros_sides(tetros);
 	tetros = ft_create_tetros(tetros->tetri_2,
