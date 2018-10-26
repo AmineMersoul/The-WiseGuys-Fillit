@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 11:33:24 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 11:52:35 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,22 @@
 t_tetros	*ft_read_tetriminos(int const fd)
 {
 	t_tetros		*tetros;
-	t_tetros		*current;
 	char			*line;
 	int				row;
 	int				col;
-	int				count;
 
-	count = 0;
 	row = 0;
 	tetros = NULL;
-	current = ft_create_tetros(NULL, NULL, NULL, NULL);
+	ft_add_tetros(&tetros, ft_create_tetros(NULL, NULL, NULL, NULL));
 	while (get_next_line(fd, &line))
 	{
 		if (row == 5)
 			row = 0;
 		if (row == 4)
 		{
-			if (!ft_check_read_1(line, count, current))
+			if (!ft_check_read_1(line, tetros))
 				return (NULL);
-			count = 0;
-			if (!tetros)
-				tetros = ft_create_tetros(current->tetri_1, current->tetri_2, current->tetri_3, current->tetri_4);
-			else
-				ft_add_tetros(&tetros, current);
-			current = ft_create_tetros(NULL, NULL, NULL, NULL);
+			ft_add_tetros(&tetros, ft_create_tetros(NULL, NULL, NULL, NULL));
 		}
 		if (!ft_check_read_3(line, row))
 			return (NULL);
@@ -49,8 +41,11 @@ t_tetros	*ft_read_tetriminos(int const fd)
 				return (NULL);
 			if (line[col] == '#')
 			{
-				count++;
-				ft_add_tetri(&current, ft_create_tetri(row, col));
+				if (!ft_add_tetri(&tetros, ft_create_tetri(row, col)))
+				{
+					printf("not a valid tetros should have 4 tetri ***\n");
+					return (NULL);
+				}
 			}
 			col++;
 		}
@@ -61,7 +56,7 @@ t_tetros	*ft_read_tetriminos(int const fd)
 		printf("invalid file should have 2 empty line at the end of the file\n");
 		return (NULL);
 	}
-	return (tetros);
+	return (tetros->next);
 }
 
 void		ft_print_tetriminos(t_tetros *tetros)

@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:36:19 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 11:03:20 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 11:48:26 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int					ft_check_tetri_down(t_tetros *tetros);
 int					ft_check_tetri_top(t_tetros *tetros);
 int					ft_check_tetros_sides(t_tetros *tetros);
 int					ft_valid_tetros(t_tetros *tetros);
-int					ft_check_read_1(char *line, int count, t_tetros *current);
+int					ft_check_read_1(char *line, t_tetros *current);
 int					ft_check_read_2(int col, char c);
 int					ft_check_read_3(char *line, int row);
 
