@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 12:44:08 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 20:39:22 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int			main(int argc, char **argv)
 			printf("error\n");
 			return (-1);
 		}
+		ft_reverse_tetros(&tetros);
+		ft_move_tetros_ftl(&tetros);
 		ft_print_tetriminos(tetros);
 		return (0);
 	}
