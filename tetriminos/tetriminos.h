@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:36:19 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 12:45:24 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 12:47:05 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define __TETRIMINOS_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include "../libft/libft.h"
 
 # define TETROS_SIZE 16
