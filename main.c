@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 12:21:41 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/26 12:44:08 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,13 @@ t_tetros	*ft_read_tetriminos(int const fd)
 				return (NULL);
 			ft_add_tetros(&tetros, ft_create_tetros(NULL, NULL, NULL, NULL));
 		}
-		if (!ft_check_read_3(line, row))
+		if (!ft_check_read_3(line, row)
+		|| !ft_read_tetri_line(line, row, &tetros))
 			return (NULL);
-		while (*line && *line != '\0')
-		{
-			if (!ft_check_read_2(*line))
-				return (NULL);
-			if (*line == '#')
-			{
-				if (!ft_add_tetri(&tetros, ft_create_tetri(row, 4 - ft_strlen(line))))
-				{
-					printf("not a valid tetros should have 4 tetri ***\n");
-					return (NULL);
-				}
-			}
-			line++;
-		}
 		row++;
 	}
 	if (row != 5)
-	{
-		printf("invalid file should have 2 empty line at the end of the file\n");
 		return (NULL);
-	}
 	return (tetros->next);
 }
 
@@ -89,7 +73,10 @@ int			main(int argc, char **argv)
 		}
 		tetros = ft_read_tetriminos(fd);
 		if (!tetros)
+		{
+			printf("error\n");
 			return (-1);
+		}
 		ft_print_tetriminos(tetros);
 		return (0);
 	}
