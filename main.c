@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 20:39:22 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/29 09:50:36 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ t_tetros	*ft_read_tetriminos(int const fd)
 			return (NULL);
 		row++;
 	}
-	if (row != 5)
-		return (NULL);
 	return (tetros->next);
 }
 

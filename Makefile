@@ -1,12 +1,11 @@
-NAME = tetriminos
+NAME = fillit
 
 SOURCE = main.c 
-OUT = tetriminos.out
 LIBS = libft/libft.a get_next_line/get_next_line.c tetriminos/tetriminos.a
 FLAGS = -Wall -Wextra -Werror
 
 run:
-	gcc $(FLAGS) $(SOURCE) $(LIBS) -o $(OUT)
+	gcc $(FLAGS) $(SOURCE) $(LIBS) -o $(NAME)
 
 all: $(NAME)
 
@@ -25,6 +24,6 @@ clean:
 fclean: clean
 	cd libft && $(MAKE) fclean
 	cd tetriminos && $(MAKE) fclean
-	rm -rf $(OUT)
+	rm -rf $(NAME)
 
 re: fclean all
