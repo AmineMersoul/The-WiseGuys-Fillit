@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 16:53:58 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/29 10:55:18 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/29 18:12:35 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void		ft_move_tetros_ftl(t_tetros **tetros)
 		}
 		while (1)
 		{
-			if ((current->tetri_1->col - 1) || (current->tetri_2->col - 1)
-			|| (current->tetri_3->col - 1) || (current->tetri_4->col - 1))
+			if ((current->tetri_1->col - 1 < 0) || (current->tetri_2->col - 1 < 0) || (current->tetri_3->col - 1 < 0) || (current->tetri_4->col - 1) < 0)
 				break ;
 			current->tetri_1->col -= 1;
 			current->tetri_2->col -= 1;

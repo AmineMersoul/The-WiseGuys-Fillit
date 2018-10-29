@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:36:19 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/26 17:22:51 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:13:07 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_tetros
 	t_tetri			*tetri_3;
 	t_tetri			*tetri_4;
 	struct s_tetros	*next;
+	struct s_tetros	*prev;
 }					t_tetros;
 
 t_tetri				*ft_create_tetri(const int row, const int col);
