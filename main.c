@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/29 18:28:36 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:06:28 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int			move_tetros_fl_d(t_tetros *tetros, int size)
 {
 	while (1)
 	{
-		if ((tetros->tetri_1->col - 1) || (tetros->tetri_2->col - 1)
-		|| (tetros->tetri_2->col - 1) || (tetros->tetri_2->col - 1))
+		if ((tetros->tetri_1->col - 1 < 0) || (tetros->tetri_2->col - 1 < 0)  || (tetros->tetri_2->col - 1 < 0) || (tetros->tetri_2->col - 1 < 0))
 			break ;
 		tetros->tetri_1->col -= 1;
 		tetros->tetri_2->col -= 1;
@@ -90,12 +89,13 @@ void		ft_print_tetriminos(t_tetros *tetros)
 
 void		print_arr(int *arr, int size)
 {
+	char *print = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	int i = 0;
 	while (i < size * size)
 	{
-		if (i % 4 == 0)
+		if (i % size == 0)
 			printf("\n");
-		printf("%d, ", arr[i]);
+		printf("%c, ", print[arr[i]]);
 		i++;
 	}
 	printf("\n");
@@ -128,10 +128,19 @@ void		remove_tetros_arr(t_tetros *tetros, int *arr, int size)
 
 int			try_place_tetros(t_tetros *tetros, int *arr, int size, int count)
 {
+	//print_arr(arr, size);
+	if (!tetros)
+		return (1);
 	while (1)
 	{
+		//printf("count %d\n", count);
 		if (place_tetros(tetros, arr, size, count))
-			break ;
+		{
+			if (try_place_tetros(tetros->next, arr, size, count + 1))
+				return (1);
+			else
+				remove_tetros_arr(tetros, arr, size);
+		}
 		if (move_tetros_right(tetros, size))
 			continue ;
 		if (!move_tetros_fl_d(tetros, size))
@@ -139,17 +148,6 @@ int			try_place_tetros(t_tetros *tetros, int *arr, int size, int count)
 			ft_move_tetros_ftl(&tetros);
 			return (0);
 		}
-	}
-	//print_arr(arr, size);
-	if (!tetros->next)
-		return (1);
-	if (!try_place_tetros(tetros->next, arr, size, count + 1))
-	{
-		remove_tetros_arr(tetros, arr, size);
-		if (move_tetros_right(tetros, size))
-			try_place_tetros(tetros, arr, size, count);
-		if (!move_tetros_fl_d(tetros, size))
-			return (0);
 	}
 	return (1);
 }
@@ -164,15 +162,14 @@ void		empty_arr(int *arr, int size)
 	}
 }
 
-
-
 int			solve_fillit(t_tetros *tetros)
 {
 	int size = 4;
     int *arr = (int *)malloc(size * size * sizeof(int));
 	empty_arr(arr, size);
 
-	try_place_tetros(tetros, arr, size, 1);
+	while (!try_place_tetros(tetros, arr, size, 1))
+		size++;
 	print_arr(arr, size);
 	return (1);
 }
