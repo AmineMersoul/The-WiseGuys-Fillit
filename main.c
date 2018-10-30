@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:46:27 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/30 12:06:28 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/30 17:10:50 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,49 +25,24 @@ t_tetros	*ft_read_tetriminos(int const fd)
 	{
 		if (row == 5)
 			row = 0;
+		// printf("line |%s|", line);
+		// printf(" row=%d\n", row);
 		if (row == 4)
+			if (ft_strlen(line) != 0)
+				return (NULL);
+		if (!ft_check_read_3(line, row) || !ft_read_tetri_line(line, row, &tetros))
+			return (NULL);
+		if (row == 3)
 		{
-			if (!ft_check_read_1(line, tetros))
+			if (!ft_check_read_1(tetros))
 				return (NULL);
 			ft_add_tetros(&tetros, ft_create_tetros(NULL, NULL, NULL, NULL));
 		}
-		if (!ft_check_read_3(line, row)
-		|| !ft_read_tetri_line(line, row, &tetros))
-			return (NULL);
 		row++;
 	}
+	if (row != 4)
+		return (NULL);
 	return (tetros->next);
-}
-
-int			move_tetros_right(t_tetros *tetros, int size)
-{
-	if ((tetros->tetri_1->col + 1 == size) || (tetros->tetri_2->col + 1 == size) || (tetros->tetri_3->col + 1 == size) || (tetros->tetri_4->col + 1 == size))
-				return (0);
-	tetros->tetri_1->col += 1;
-	tetros->tetri_2->col += 1;
-	tetros->tetri_3->col += 1;
-	tetros->tetri_4->col += 1;
-	return (1);
-}
-
-int			move_tetros_fl_d(t_tetros *tetros, int size)
-{
-	while (1)
-	{
-		if ((tetros->tetri_1->col - 1 < 0) || (tetros->tetri_2->col - 1 < 0)  || (tetros->tetri_2->col - 1 < 0) || (tetros->tetri_2->col - 1 < 0))
-			break ;
-		tetros->tetri_1->col -= 1;
-		tetros->tetri_2->col -= 1;
-		tetros->tetri_3->col -= 1;
-		tetros->tetri_4->col -= 1;
-	}
-	if ((tetros->tetri_1->row + 1 == size) || (tetros->tetri_2->row + 1 == size) || (tetros->tetri_3->row + 1 == size) || (tetros->tetri_4->row + 1 == size))
-				return (0);
-	tetros->tetri_1->row += 1;
-	tetros->tetri_2->row += 1;
-	tetros->tetri_3->row += 1;
-	tetros->tetri_4->row += 1;
-	return (1);
 }
 
 void		ft_print_tetriminos(t_tetros *tetros)
@@ -89,13 +64,13 @@ void		ft_print_tetriminos(t_tetros *tetros)
 
 void		print_arr(int *arr, int size)
 {
-	char *print = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char *print = ".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	int i = 0;
 	while (i < size * size)
 	{
-		if (i % size == 0)
+		if (i % size == 0 && i != 0)
 			printf("\n");
-		printf("%c, ", print[arr[i]]);
+		printf("%c", print[arr[i]]);
 		i++;
 	}
 	printf("\n");
@@ -141,9 +116,9 @@ int			try_place_tetros(t_tetros *tetros, int *arr, int size, int count)
 			else
 				remove_tetros_arr(tetros, arr, size);
 		}
-		if (move_tetros_right(tetros, size))
+		if (ft_move_tetros_r(tetros, size))
 			continue ;
-		if (!move_tetros_fl_d(tetros, size))
+		if (!ft_move_tetros_fl_d(tetros, size))
 		{
 			ft_move_tetros_ftl(&tetros);
 			return (0);
@@ -197,7 +172,6 @@ int			main(int argc, char **argv)
 		ft_move_tetros_ftl(&tetros);
 		//ft_print_tetriminos(tetros);
 		solve_fillit(tetros);
-		//ft_print_tetriminos(tetros);
 		return (0);
 	}
 	printf("Usage : ./tetriminos.out <filename>\n");
