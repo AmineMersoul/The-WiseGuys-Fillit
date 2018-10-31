@@ -4,18 +4,16 @@ SOURCE = main.c
 LIBS = libft/libft.a get_next_line/get_next_line.c tetriminos/tetriminos.a
 FLAGS = -Wall -Wextra -Werror
 
-run:
-	gcc $(FLAGS) $(SOURCE) $(LIBS) -o $(NAME)
-
 all: $(NAME)
 
 mlibft:
-	cd libft && $(MAKE) re && $(MAKE) clean
+	cd libft && $(MAKE)
 
 mtetriminos:
-	cd tetriminos && $(MAKE) re && $(MAKE) clean
+	cd tetriminos && $(MAKE)
 
-$(NAME): mlibft mtetriminos run
+$(NAME): mlibft mtetriminos
+	gcc $(FLAGS) $(SOURCE) $(LIBS) -o $(NAME)
 
 clean:
 	cd libft && $(MAKE) clean

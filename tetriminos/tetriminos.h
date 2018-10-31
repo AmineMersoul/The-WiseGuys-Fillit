@@ -6,7 +6,7 @@
 /*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:36:19 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/30 17:10:21 by amersoul         ###   ########.fr       */
+/*   Updated: 2018/10/31 10:01:03 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 # define TETROS_SIZE 16
 
@@ -53,5 +54,14 @@ void				ft_move_tetros_ftl(t_tetros **tetros);
 void				ft_reverse_tetros(t_tetros **head_ref);
 int					ft_move_tetros_r(t_tetros *tetros, int size);
 int					ft_move_tetros_fl_d(t_tetros *tetros, int size);
+int					ft_try_place_tetros(t_tetros *tetros,
+	int *arr, int size, int count);
+int					ft_place_tetros(t_tetros *tetros,
+	int *arr, int size, int count);
+t_tetros			*ft_read_tetros(int const fd);
+void				ft_remove_tetros_arr(t_tetros *tetros, int *arr, int size);
+void				ft_print_arr(int *arr, int size);
+void				ft_empty_arr(int *arr, int size);
+int					ft_solve_fillit(t_tetros *tetros);
 
 #endif

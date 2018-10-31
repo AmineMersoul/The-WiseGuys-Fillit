@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_empty_arr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amersoul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amersoul <amersoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 13:11:01 by amersoul          #+#    #+#             */
-/*   Updated: 2018/10/19 13:11:02 by amersoul         ###   ########.fr       */
+/*   Created: 2018/10/31 09:59:08 by amersoul          #+#    #+#             */
+/*   Updated: 2018/10/31 09:59:42 by amersoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FILLIT_H
-# define __FILLIT_H
+#include "tetriminos.h"
 
-# include "get_next_line/get_next_line.h"
-# include "tetriminos/tetriminos.h"
-# include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
+void		ft_empty_arr(int *arr, int size)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (i < size * size)
+	{
+		arr[i] = 0;
+		i++;
+	}
+}
