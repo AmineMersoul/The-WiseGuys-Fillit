@@ -6,13 +6,9 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-mlibft:
+$(NAME):
 	cd libft && $(MAKE)
-
-mtetriminos:
 	cd tetriminos && $(MAKE)
-
-$(NAME): mlibft mtetriminos
 	gcc $(FLAGS) $(SOURCE) $(LIBS) -o $(NAME)
 
 clean:
